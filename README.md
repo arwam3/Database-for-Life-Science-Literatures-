@@ -8,8 +8,6 @@ This repository hosts the SQL scripts for setting up a MySQL database designed t
 * `load_data.sql`: SQL script for populating the database with sample data.
 * `queries.sql`: SQL script containing example queries to retrieve data.
 * `Tables.sql`: SQL script for defining the database schema and creating tables.
-* `image_6fe553.jpg`: Screenshot of MySQL Workbench.
-* `image_6fda6f.png`: Screenshot of the C# Windows Forms application.
 
 ## Database Setup (MySQL)
 
