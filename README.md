@@ -1,7 +1,6 @@
 # Life Science Literature Management System
 
-This repository hosts the SQL scripts for setting up a MySQL database designed to manage life science literature data, including authors, research papers, journals, publishers, and their interconnections. Additionally, it provides guidance on how to integrate this database with a C# Windows Forms application for seamless data interaction.
-
+This repository hosts the SQL scripts for setting up a MySQL database designed to manage life science literature data, including authors, research papers, journals, publishers, and their interconnections. 
 ## Project Structure
 
 * `DVL.sql`: SQL script for creating database views.
