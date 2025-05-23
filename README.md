@@ -86,32 +86,64 @@ The `queries.sql` file provides a set of example SQL queries that demonstrate ho
 
 You can execute these queries in MySQL Workbench or your chosen MySQL client to test data retrieval and understand the database structure.
 
-## Application Connection (C# Windows Forms - Visual Studio)
+# Life Science Database Management System UI
 
-### Prerequisites
+This is a desktop application built using Python's Tkinter library and designed to manage and display information related to biomedical research, authors, and journals. It connects to a MySQL database (`LifeScienceDB`) to retrieve and present data.
 
-* **Visual Studio**: The integrated development environment (IDE) necessary for C# application development.
-* **MySQL Connector/NET**: This is the official ADO.NET driver that enables C# applications to establish connections and communicate with MySQL databases.
+## Features
 
-### Steps to Connect
+* **User-Friendly Interface:** Intuitive graphical user interface (GUI) built with Tkinter.
+* **Database Integration:** Connects to a MySQL database (`LifeScienceDB`) to fetch and display data.
+* **Role-Based Access (Basic):** Differentiates between 'admin' and 'user' roles, with potential for extended functionalities for 'admin' users.
+* **Data Visualization (Treeview):** Displays research papers, journals, and authors in an organized, scrollable table format using `ttk.Treeview`.
+* **Login Screen:** Secure login interface for authentication.
+* **Dynamic Content:** Tabs are generated and populated based on user roles after successful login.
 
-1.  **Install MySQL Connector/NET:**
-    * Within your Visual Studio project, navigate to `Tools` > `NuGet Package Manager` > `Manage NuGet Packages for Solution...`.
-    * Search for `MySql.Data` and proceed to install this NuGet package into your project.
+## Setup Instructions
 
-2.  **Establish Connection in C# Code:**
-    * In the C# code files where you intend to perform database operations, add the following `using` directive:
-        ```csharp
-        using MySql.Data.MySqlClient;
-        ```
-    * Define your database connection string. This string contains essential connection parameters:
-        ```csharp
-        string connectionString = "server=localhost;port=3306;database=LifeScienceDB;uid=your_mysql_username;pwd=your_mysql_password;";
-        ```
-        * **Important**: Replace `your_mysql_username` and `your_mysql_password` with your actual MySQL server credentials. The `database` name should precisely match `LifeScienceDB`.
-    * Utilize the `MySqlConnection` object to open and close connections to the database as needed.
-    * Employ `MySqlCommand` objects to execute various SQL queries, including `INSERT`, `SELECT`, `UPDATE`, and `DELETE` statements.
-    * For retrieving data, use `MySqlDataReader` for forward-only, read-only access, or `MySqlDataAdapter` for populating `DataSet` or `DataTable` objects, which can then be bound to UI controls like `DataGridView` or used to populate individual text boxes.
+### 1. Database Setup
+
+Before running the application, ensure your MySQL database is set up correctly.
+
+* **Create the Database:** Execute the `Tables.sql` script to create the `LifeScienceDB` database and its tables.
+* **Populate Data:** Execute the `load_data.sql` script to insert sample data into the tables.
+* **Create Views (Optional but Recommended):** Execute the `DVL.sql` script to create the views that can simplify certain queries, although the current Python app does not directly use all of them.
+
+### 2. Python Environment
+
+1.  **Install Python:** Ensure you have Python 3.x installed (e.g., Python 3.8+).
+2.  **Install Required Libraries:** Open your terminal or command prompt and install the necessary Python packages:
+    ```bash
+    pip install tk
+    pip install Pillow
+    pip install mysql-connector-python
+    ```
+    * `tk`: Tkinter is usually included with Python installations, but `python-tk` might be needed on some Linux distributions (e.g., `sudo apt-get install python3-tk`).
+    * `Pillow`: For image handling (`PIL` fork).
+    * `mysql-connector-python`: To connect to the MySQL database.
+
+### 3. Application Files
+
+1.  **Save the Python Code:** Save the provided Python code (from your prompt) as `app.py` (or any other `.py` file).
+2.  **Background Image:** The application attempts to load a background image named `biomedical_bg.jpg`. Place an image with this name in the same directory as `app.py`, or modify the `load_images` method in `app.py` to point to your image file. If the image is not found, the background will simply be plain.
+
+### 4. Database Credentials
+
+Open `app.py` and locate the `db_connect` method. Update the `host`, `user`, and `password` parameters to match your MySQL database credentials:
+
+```python
+    def db_connect(self):
+        try:
+            self.conn = mysql.connector.connect(
+                host="localhost", # Your MySQL host
+                user="root",      # Your MySQL username
+                password="Forrest_j7bye", # Your MySQL password
+                database="LifeScienceDB"
+            )
+            self.cursor = self.conn.cursor(dictionary=True)
+        except Exception as e:
+            messagebox.showerror("Database Error", f"Failed to connect: {str(e)}")
+            self.root.destroy().
 
     }
 
