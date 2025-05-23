@@ -1,127 +1,124 @@
+# Life Science Literature Management System
 
-        <h1>Life Science Literature Management System</h1>
+This repository hosts the SQL scripts for setting up a MySQL database designed to manage life science literature data, including authors, research papers, journals, publishers, and their interconnections. Additionally, it provides guidance on how to integrate this database with a C# Windows Forms application for seamless data interaction.
 
-        <p>This repository hosts the SQL scripts for setting up a MySQL database designed to manage life science literature data, including authors, research papers, journals, publishers, and their interconnections. Additionally, it provides guidance on how to integrate this database with a C# Windows Forms application for seamless data interaction.</p>
+## Project Structure
 
-        <img src="image_6fe553.jpg" alt="MySQL Workbench Screenshot">
-        <p style="text-align: center; font-style: italic; color: #555;">Figure 1: Example of MySQL Workbench with SQL schema.</p>
+* `DVL.sql`: SQL script for creating database views.
+* `load_data.sql`: SQL script for populating the database with sample data.
+* `queries.sql`: SQL script containing example queries to retrieve data.
+* `Tables.sql`: SQL script for defining the database schema and creating tables.
+* `image_6fe553.jpg`: Screenshot of MySQL Workbench.
+* `image_6fda6f.png`: Screenshot of the C# Windows Forms application.
 
-        <img src="image_6fda6f.png" alt="Visual Studio C# Application Screenshot">
-        <p style="text-align: center; font-style: italic; color: #555;">Figure 2: Example of a C# Windows Forms Application in Visual Studio.</p>
+## Database Setup (MySQL)
 
+The database schema is structured to efficiently handle various entities within the domain of life science literature.
 
-        <h2>Database Setup (MySQL)</h2>
-        <p>The database schema is structured to efficiently handle various entities within the domain of life science literature.</p>
+### 1. Database and Table Definitions
 
-        <h3>1. Database and Table Definitions</h3>
-        <p>The <code>Tables.sql</code> file contains the SQL commands to create the <code>LifeScienceDB</code> database and define all its constituent tables <span class="file-citation"></span>.</p>
-        <ul>
-            <li><strong>Publisher</strong>: Stores details about publishing houses <span class="file-citation"></span>.</li>
-            <li><strong>PublicationType</strong>: Enumerates different categories of publications such as Journal, Book, or Ebook <span class="file-citation"></span>.</li>
-            <li><strong>PublisherPublicationType</strong>: Establishes a many-to-many relationship linking publishers to the specific types of publications they handle <span class="file-citation"></span>.</li>
-            <li><strong>PaymentMethod</strong>: Lists various methods of payment accepted <span class="file-citation"></span>.</li>
-            <li><strong>PublisherPaymentMethod</strong>: Connects publishers with the payment methods they accept <span class="file-citation"></span>.</li>
-            <li><strong>BiomedicalField</strong>: Classifies research into distinct biomedical fields <span class="file-citation"></span>.</li>
-            <li><strong>Journal</strong>: Contains comprehensive information about journals, including their ISSN, impact factor, associated publisher, and more <span class="file-citation"></span>.</li>
-            <li><strong>JournalField</strong>: Defines a many-to-many relationship, associating journals with specific biomedical fields <span class="file-citation"></span>.</li>
-            <li><strong>Author</strong>: Stores authors' personal and professional details such as name, qualification, affiliation, and H-Index <span class="file-citation"></span>.</li>
-            <li><strong>AuthorField</strong>: Links authors to their primary fields of research interest <span class="file-citation"></span>.</li>
-            <li><strong>Research</strong>: Provides detailed information about research papers, including title, abstract, publication date, and the journal in which they were published <span class="file-citation"></span>.</li>
-            <li><strong>Research_Authors</strong>: Manages the many-to-many relationship between research papers and their contributing authors <span class="file-citation"></span>.</li>
-            <li><strong>Citation</strong>: A self-referencing table used to track citations between different research papers <span class="file-citation"></span>.</li>
-        </ul>
+The `Tables.sql` file contains the SQL commands to create the `LifeScienceDB` database and define all its constituent tables.
 
-        <h4>To set up the database:</h4>
-        <ol>
-            <li>Open MySQL Workbench or any other preferred MySQL client.</li>
-            <li>Execute the <code>Tables.sql</code> script to create the <code>LifeScienceDB</code> database and all its tables <span class="file-citation"></span>.</li>
-        </ol>
+* **Publisher**: Stores details about publishing houses.
+* **PublicationType**: Enumerates different categories of publications such as Journal, Book, or Ebook.
+* **PublisherPublicationType**: Establishes a many-to-many relationship linking publishers to the specific types of publications they handle.
+* **PaymentMethod**: Lists various methods of payment accepted.
+* **PublisherPaymentMethod**: Connects publishers with the payment methods they accept.
+* **BiomedicalField**: Classifies research into distinct biomedical fields.
+* **Journal**: Contains comprehensive information about journals, including their ISSN, impact factor, associated publisher, and more.
+* **JournalField**: Defines a many-to-many relationship, associating journals with specific biomedical fields.
+* **Author**: Stores authors' personal and professional details such as name, qualification, affiliation, and H-Index.
+* **AuthorField**: Links authors to their primary fields of research interest.
+* **Research**: Provides detailed information about research papers, including title, abstract, publication date, and the journal in which they were published.
+* **Research_Authors**: Manages the many-to-many relationship between research papers and their contributing authors.
+* **Citation**: A self-referencing table used to track citations between different research papers.
 
-        <h3>2. Data Population</h3>
-        <p>The <code>load_data.sql</code> file provides <code>INSERT</code> statements to populate the newly created database tables with sample data <span class="file-citation"></span>.</p>
-        <ul>
-            <li><strong>BiomedicalField</strong>: Inserts at least 10 distinct biomedical fields <span class="file-citation"></span>.</li>
-            <li><strong>Publisher</strong>: Adds 10 sample publisher entries <span class="file-citation"></span>.</li>
-            <li><strong>PublicationType</strong>: Includes 3 publication types: 'Journal', 'Book', and 'Ebook' <span class="file-citation"></span>.</li>
-            <li><strong>PublisherPublicationType</strong>: Establishes at least 10 links between publishers and publication types <span class="file-citation"></span>.</li>
-            <li><strong>PaymentMethod</strong>: Inserts at least 5 different payment methods <span class="file-citation"></span>.</li>
-            <li><strong>PublisherPaymentMethod</strong>: Creates at least 10 associations between publishers and payment methods <span class="file-citation"></span>.</li>
-            <li><strong>Journal</strong>: Populates the table with at least 10 journal entries, complete with various attributes <span class="file-citation"></span>.</li>
-            <li><strong>JournalField</strong>: Links at least 10 journals to their respective biomedical fields <span class="file-citation"></span>.</li>
-            <li><strong>Author</strong>: Adds at least 10 author records, including their qualifications and affiliations <span class="file-citation"></span>.</li>
-            <li><strong>AuthorField</strong>: Establishes at least 10 connections between authors and their fields of expertise <span class="file-citation"></span>.</li>
-            <li><strong>Research</strong>: Inserts at least 10 research paper entries with abstracts and publication dates <span class="file-citation"></span>.</li>
-            <li><strong>Research_Authors</strong>: Creates at least 10 links between research papers and their authors <span class="file-citation"></span>.</li>
-            <li><strong>Citation</strong>: Adds at least 10 citation entries, demonstrating inter-research paper references <span class="file-citation"></span>.</li>
-        </ul>
+#### To set up the database:
+1.  Open MySQL Workbench or any other preferred MySQL client.
+2.  Execute the `Tables.sql` script to create the `LifeScienceDB` database and all its tables.
 
-        <h4>To load the data:</h4>
-        <ol>
-            <li>Ensure you have successfully executed <code>Tables.sql</code> first.</li>
-            <li>Execute the <code>load_data.sql</code> script in your MySQL client to populate the tables with the provided sample data <span class="file-citation"></span>.</li>
-        </ol>
+### 2. Data Population
 
-        <h3>3. Database Views</h3>
-        <p>The <code>DVL.sql</code> file contains SQL commands for creating several database views, which are designed to simplify complex queries and offer summarized perspectives on the data <span class="file-citation"></span>.</p>
-        <ul>
-            <li><strong>View_Authors_Immunology</strong>: Displays distinct authors whose research interests include 'Immunology' <span class="file-citation"></span>.</li>
-            <li><strong>View_OpenAccess_Journals_Springer</strong>: Lists open-access journals that are published by 'Springer' <span class="file-citation"></span>.</li>
-            <li><strong>View_Author_Citation_Counts</strong>: Calculates and presents the total citation count for each author, ordered in descending fashion <span class="file-citation"></span>.</li>
-            <li><strong>View_Research_Authors</strong>: Provides a consolidated list of research papers along with their associated authors <span class="file-citation"></span>.</li>
-            <li><strong>View_Journal_BiomedicalFields</strong>: Shows all journals and the biomedical fields they are related to <span class="file-citation"></span>.</li>
-        </ul>
+The `load_data.sql` file provides `INSERT` statements to populate the newly created database tables with sample data.
 
-        <h4>To create the views:</h4>
-        <ol>
-            <li>Verify that both <code>Tables.sql</code> and <code>load_data.sql</code> have been executed.</li>
-            <li>Execute the <code>DVL.sql</code> script in your MySQL client <span class="file-citation"></span>.</li>
-        </ol>
+* **BiomedicalField**: Inserts at least 10 distinct biomedical fields.
+* **Publisher**: Adds 10 sample publisher entries.
+* **PublicationType**: Includes 3 publication types: 'Journal', 'Book', and 'Ebook'.
+* **PublisherPublicationType**: Establishes at least 10 links between publishers and publication types.
+* **PaymentMethod**: Inserts at least 5 different payment methods.
+* **PublisherPaymentMethod**: Creates at least 10 associations between publishers and payment methods.
+* **Journal**: Populates the table with at least 10 journal entries, complete with various attributes.
+* **JournalField**: Links at least 10 journals to their respective biomedical fields.
+* **Author**: Adds at least 10 author records, including their qualifications and affiliations.
+* **AuthorField**: Establishes at least 10 connections between authors and their fields of expertise.
+* **Research**: Inserts at least 10 research paper entries with abstracts and publication dates.
+* **Research_Authors**: Creates at least 10 links between research papers and their authors.
+* **Citation**: Adds at least 10 citation entries, demonstrating inter-research paper references.
 
-        <h3>4. Example Queries</h3>
-        <p>The <code>queries.sql</code> file provides a set of example SQL queries that demonstrate how to retrieve specific information from the populated database <span class="file-citation"></span>.</p>
-        <ul>
-            <li>Retrieve the names of authors whose research interest is Immunology <span class="file-citation"></span>.</li>
-            <li>Identify the author with the highest number of citations in 2023 (requires a <code>CitationDate</code> column in the <code>Citation</code> table) <span class="file-citation"></span>.</li>
-            <li>List all open access journals published by Springer <span class="file-citation"></span>.</li>
-            <li>Find all publications (research titles) authored by 'Dr. Alice Smith' <span class="file-citation"></span>.</li>
-            <li>List journals and their impact factors that publish research in 'Genetics and Genomics' <span class="file-citation"></span>.</li>
-            <li>Count the total number of research papers published by each author <span class="file-citation"></span>.</li>
-            <li>Identify publishers that support 'Ebook' as a publication type <span class="file-citation"></span>.</li>
-            <li>List all payment methods accepted by 'Nature Publishing Group' <span class="file-citation"></span>.</li>
-        </ul>
-        <p>You can execute these queries in MySQL Workbench or your chosen MySQL client to test data retrieval and understand the database structure.</p>
+#### To load the data:
+1.  Ensure you have successfully executed `Tables.sql` first.
+2.  Execute the `load_data.sql` script in your MySQL client to populate the tables with the provided sample data.
 
-        <h2>Application Connection (C# Windows Forms - Visual Studio)</h2>
-        <p>The C# Windows Forms application, as depicted in <a href="image_6fda6f.png"><code>image_6fda6f.png</code></a>, is designed to interact with this MySQL database.</p>
+### 3. Database Views
 
-        <h3>Prerequisites</h3>
-        <ul>
-            <li><strong>Visual Studio</strong>: The integrated development environment (IDE) necessary for C# application development.</li>
-            <li><strong>MySQL Connector/NET</strong>: This is the official ADO.NET driver that enables C# applications to establish connections and communicate with MySQL databases.</li>
-        </ul>
+The `DVL.sql` file contains SQL commands for creating several database views, which are designed to simplify complex queries and offer summarized perspectives on the data.
 
-        <h3>Steps to Connect</h3>
-        <ol>
-            <li><strong>Install MySQL Connector/NET:</strong>
-                <p>Within your Visual Studio project, navigate to <code>Tools</code> > <code>NuGet Package Manager</code> > <code>Manage NuGet Packages for Solution...</code>.</p>
-                <p>Search for <code>MySql.Data</code> and proceed to install this NuGet package into your project.</p>
-            </li>
-            <li><strong>Establish Connection in C# Code:</strong>
-                <p>In the C# code files where you intend to perform database operations, add the following <code>using</code> directive:</p>
-<pre><code>using MySql.Data.MySqlClient;
-</code></pre>
-                <p>Define your database connection string. This string contains essential connection parameters:</p>
-<pre><code>string connectionString = "server=localhost;port=3306;database=LifeScienceDB;uid=your_mysql_username;pwd=your_mysql_password;";
-</code></pre>
-                <p><strong>Important</strong>: Replace <code>your_mysql_username</code> and <code>your_mysql_password</code> with your actual MySQL server credentials. The <code>database</code> name should precisely match <code>LifeScienceDB</code>.</p>
-                <p>Utilize the <code>MySqlConnection</code> object to open and close connections to the database as needed.</p>
-                <p>Employ <code>MySqlCommand</code> objects to execute various SQL queries, including <code>INSERT</code>, <code>SELECT</code>, <code>UPDATE</code>, and <code>DELETE</code> statements.</p>
-                <p>For retrieving data, use <code>MySqlDataReader</code> for forward-only, read-only access, or <code>MySqlDataAdapter</code> for populating <code>DataSet</code> or <code>DataTable</code> objects, which can then be bound to UI controls like <code>DataGridView</code> or used to populate individual text boxes.</p>
-            </li>
-        </ol>
+* **View_Authors_Immunology**: Displays distinct authors whose research interests include 'Immunology'.
+* **View_OpenAccess_Journals_Springer**: Lists open-access journals that are published by 'Springer'.
+* **View_Author_Citation_Counts**: Calculates and presents the total citation count for each author, ordered in descending fashion.
+* **View_Research_Authors**: Provides a consolidated list of research papers along with their associated authors.
+* **View_Journal_BiomedicalFields**: Shows all journals and the biomedical fields they are related to.
 
-        <h3>Example C# Code Snippet (Conceptual)</h3>
-<pre><code>using MySql.Data.MySqlClient;
+#### To create the views:
+1.  Verify that both `Tables.sql` and `load_data.sql` have been executed.
+2.  Execute the `DVL.sql` script in your MySQL client.
+
+### 4. Example Queries
+
+The `queries.sql` file provides a set of example SQL queries that demonstrate how to retrieve specific information from the populated database.
+
+* List the name of authors whose research of interest is Immunology.
+* Who is the author with the most citations in 2023 (NOTE: This requires CitationDate in Citation table; adjust if not present).
+* List open access journals published by Springer.
+* List all publications (research titles) by author 'Dr. Alice Smith'.
+* List journals and their impact factors that publish research in 'Genetics and Genomics'.
+* Count how many research papers each author has published.
+* List publishers who accept 'Ebook' publication type.
+* List payment methods accepted by 'Nature Publishing Group'.
+
+You can execute these queries in MySQL Workbench or your chosen MySQL client to test data retrieval and understand the database structure.
+
+## Application Connection (C# Windows Forms - Visual Studio)
+
+### Prerequisites
+
+* **Visual Studio**: The integrated development environment (IDE) necessary for C# application development.
+* **MySQL Connector/NET**: This is the official ADO.NET driver that enables C# applications to establish connections and communicate with MySQL databases.
+
+### Steps to Connect
+
+1.  **Install MySQL Connector/NET:**
+    * Within your Visual Studio project, navigate to `Tools` > `NuGet Package Manager` > `Manage NuGet Packages for Solution...`.
+    * Search for `MySql.Data` and proceed to install this NuGet package into your project.
+
+2.  **Establish Connection in C# Code:**
+    * In the C# code files where you intend to perform database operations, add the following `using` directive:
+        ```csharp
+        using MySql.Data.MySqlClient;
+        ```
+    * Define your database connection string. This string contains essential connection parameters:
+        ```csharp
+        string connectionString = "server=localhost;port=3306;database=LifeScienceDB;uid=your_mysql_username;pwd=your_mysql_password;";
+        ```
+        * **Important**: Replace `your_mysql_username` and `your_mysql_password` with your actual MySQL server credentials. The `database` name should precisely match `LifeScienceDB`.
+    * Utilize the `MySqlConnection` object to open and close connections to the database as needed.
+    * Employ `MySqlCommand` objects to execute various SQL queries, including `INSERT`, `SELECT`, `UPDATE`, and `DELETE` statements.
+    * For retrieving data, use `MySqlDataReader` for forward-only, read-only access, or `MySqlDataAdapter` for populating `DataSet` or `DataTable` objects, which can then be bound to UI controls like `DataGridView` or used to populate individual text boxes.
+
+### Example C# Code Snippet (Conceptual)
+
+```csharp
+using MySql.Data.MySqlClient;
 using System;
 using System.Windows.Forms;
 
@@ -142,3 +139,61 @@ public partial class PublisherForm : Form
         try
         {
             using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                connection.Open();
+                string query = "SELECT PublisherID, Name FROM Publisher";
+                MySqlCommand cmd = new MySqlCommand(query, connection);
+
+                using (MySqlDataReader reader = cmd.ExecuteReader())
+                {
+                    // Example: Assuming 'listBoxPublishers' is a ListBox control on your form
+                    // You might clear existing items before loading new ones
+                    // listBoxPublishers.Items.Clear(); 
+                    while (reader.Read())
+                    {
+                        // Add publisher names to the ListBox
+                        // listBoxPublishers.Items.Add(reader["Name"].ToString()); 
+                        // Alternatively, populate a DataGridView or other UI element
+                    }
+                }
+            }
+        }
+        catch (MySqlException ex)
+        {
+            MessageBox.Show("Error loading publishers: " + ex.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+    }
+
+    private void btnAddPublisher_Click(object sender, EventArgs e)
+    {
+        // This method demonstrates adding a new publisher based on user input
+        // Assuming 'txtPublisherName' is a TextBox control on your form
+        string publisherName = txtPublisherName.Text; 
+
+        try
+        {
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                connection.Open();
+                string query = "INSERT INTO Publisher (Name) VALUES (@Name)";
+                MySqlCommand cmd = new MySqlCommand(query, connection);
+                cmd.Parameters.AddWithValue("@Name", publisherName);
+
+                int rowsAffected = cmd.ExecuteNonQuery();
+                if (rowsAffected > 0)
+                {
+                    MessageBox.Show("Publisher added successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    LoadPublishers(); // Refresh the list of publishers to show the new entry
+                }
+            }
+        }
+        catch (MySqlException ex)
+        {
+            MessageBox.Show("Error adding publisher: " + ex.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+    }
+
+    // Similar methods for 'Update' and 'Delete' operations would be implemented here, 
+    // following the same pattern of opening a connection, executing a MySqlCommand, 
+    // and handling potential exceptions.
+}
