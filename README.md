@@ -136,7 +136,7 @@ Open `app.py` and locate the `db_connect` method. Update the `host`, `user`, and
             self.conn = mysql.connector.connect(
                 host="localhost", # Your MySQL host
                 user="root",      # Your MySQL username
-                password="Forrest_j7bye", # Your MySQL password
+                password="", # Your MySQL password
                 database="LifeScienceDB"
             )
             self.cursor = self.conn.cursor(dictionary=True)
